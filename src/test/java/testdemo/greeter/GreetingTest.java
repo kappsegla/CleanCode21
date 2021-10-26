@@ -1,44 +1,53 @@
 package testdemo.greeter;
 
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static testdemo.greeter.Greeting.greet;
 
 public class GreetingTest {
 
 
     @Test
-    void callingGreetWithNameBobShouldReturnHelloBob(){
-        Greeting greeting = new Greeting();
-        String answer = greeting.greet("Bob");
-        assertEquals("Hello, Bob.", answer);
+    void givenNameBobGreetShouldReturnHelloBob() {
+        String answer = greet("Bob");
+
+        assertThat(answer).isEqualTo("Hello Bob");
     }
 
     @Test
-    void callingGreetWithNameMartinShouldReturnHelloMartin(){
-        Greeting greeting = new Greeting();
-        String answer = greeting.greet("Martin");
-        assertEquals("Hello, Martin.", answer);
+    void givenNullAsNameGreetShouldReturnHellomyFriend() {
+       assertThat(greet(null)).isEqualTo("Hello, my friend.");
     }
 
     @Test
-    void callingGreetWithNullAsNameShouldReturnHelloMyFriend(){
-        Greeting greeting = new Greeting();
-        String answer = greeting.greet(null);
-        assertEquals("Hello, my friend.", answer);
+    void givenNameMartinGreetShouldReturnHelloMartin() {
+        assertThat(greet("Martin")).isEqualTo("Hello Martin");
     }
 
     @Test
-    @DisplayName("Calling greet with uppercase NAME should return HELLO NAME!")
-    void callingGreetWithNAMEUppercaseShouldReturnHELLONAME(){
-        Greeting greeting = new Greeting();
-        String answer = greeting.greet("ANNA");
-        assertEquals("HELLO ANNA!", answer);
+    void givenNameJERRYShouldReturnHELLOJERRY() {
+        assertThat(greet("JERRY")).isEqualTo("HELLO JERRY");
+    }
+
+    @Test
+    void givenNameANNAShouldReturnHELLOANNA() {
+        assertThat(greet("ANNA")).isEqualTo("HELLO ANNA");
+    }
+
+    @Test
+    void givenTwoNamesShouldReturnHelloName1AndName2() {
+        assertThat(greet("Jill,Jane")).isEqualTo("Hello Jill and Jane");
+    }
+
+    @Test
+    void givenAnotherPairOfNamesShouldReturnHelloName1AndName2() {
+        assertThat(greet("Joakim,Frida")).isEqualTo("Hello Joakim and Frida");
     }
 
 
+    
 
 
 }

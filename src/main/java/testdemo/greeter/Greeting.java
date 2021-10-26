@@ -1,22 +1,25 @@
 package testdemo.greeter;
 
+import java.util.List;
+
 public class Greeting {
-    public String greet(String name) {
+    public static String greet(String name) {
         if (name == null)
             return "Hello, my friend.";
 
-        if(isAllUpperCase(name))
-            return "HELLO " + name +"!";
+        if (isUpperCase(name))
+            return "HELLO " + name;
 
-        return "Hello, " + name + ".";
+        return "Hello " + name.replaceAll(",", " and ");
     }
 
-    private boolean isAllUpperCase(String name) {
-        char[] charArray = name.toCharArray();
-        for (char c : charArray) {
-            if (!Character.isUpperCase(c))
+    private static boolean isUpperCase(String name) {
+      /*  char[] chars = name.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if( Character.isLowerCase(chars[i]))
                 return false;
         }
-        return true;
+        return true;*/
+        return name.toUpperCase().equals(name);
     }
 }
