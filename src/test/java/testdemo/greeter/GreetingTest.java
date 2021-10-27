@@ -8,7 +8,6 @@ import static testdemo.greeter.Greeting.greet;
 
 public class GreetingTest {
 
-
     @Test
     void givenNameBobGreetShouldReturnHelloBob() {
         String answer = greet("Bob");
@@ -45,9 +44,4 @@ public class GreetingTest {
     void givenAnotherPairOfNamesShouldReturnHelloName1AndName2() {
         assertThat(greet("Joakim,Frida")).isEqualTo("Hello Joakim and Frida");
     }
-
-
-    
-
-
 }
