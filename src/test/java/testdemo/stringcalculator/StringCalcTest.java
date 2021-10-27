@@ -16,6 +16,11 @@ public class StringCalcTest {
         assertEquals(0, stringCalc.add(""));
     }
 
+    @Test
+    void givenAStringWithOneNumberShouldReturnThatNumber() {
+        assertEquals(1,stringCalc.add("1"));
+    }
+
 
 
 
