@@ -26,6 +26,12 @@ public class StringCalcTest {
         assertEquals(3,stringCalc.add("1,2"));
     }
 
+    @Test
+    void givenAStringWithThreeNumbersReturnsSum() {
+        assertEquals(5, stringCalc.add("1,2,2"));
+    }
+
+
 
 
 }
