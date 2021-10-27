@@ -21,6 +21,10 @@ public class StringCalcTest {
         assertEquals(1,stringCalc.add("1"));
     }
 
+    @Test
+    void givenAStringWithTwoNumbersReturnsSumOfNumbers() {
+        assertEquals(3,stringCalc.add("1,2"));
+    }
 
 
 
