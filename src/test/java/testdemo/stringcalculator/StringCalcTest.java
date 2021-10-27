@@ -31,6 +31,10 @@ public class StringCalcTest {
         assertEquals(5, stringCalc.add("1,2,2"));
     }
 
+    @Test
+    void givenAStringWithCommaOrNewLineAsSeparatorsReturnsSum() {
+        assertEquals(6, stringCalc.add("1\n2,3"));
+    }
 
 
 
