@@ -3,7 +3,7 @@ package testdemo.ssb;
 import java.util.Random;
 import java.util.Scanner;
 
-public class stepsons {
+public class Stepsons {
 
 static void stenSaxPåse(){
 
