@@ -3,26 +3,35 @@ package testdemo.ssb;
 import java.util.Random;
 import java.util.Scanner;
 
+class Score {
+    int computerScore;
+    int playerScore;
+}
+
+
 public class Stepsons {
+    public static final Scanner SCANNER = new Scanner(System.in);
+    static Random ran = new Random();
+    static ConsolePresenter consolePresenter = new ConsolePresenter();
 
-static void stenSaxPåse(){
+    static void setRandom(Random random){
+        ran = random;
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        Random ran = new Random();
+    static void stenSaxPåse(){
 
-        int computerScore = 0;
-        int playerScore = 0;
+        Score score = new Score();
         int computerChoice;
         int playerInput;
 
         System.out.println("Välkommen till Sten Sax Påse");
 
-        while (computerScore < 3 && playerScore < 3) {
+        while (score.computerScore < 3 && score.playerScore < 3) {
 
             System.out.println("Skriv 1 för Sten, 2 för Sax och 3 för Påse");
 
             try {
-                playerInput = scanner.nextInt();
+                playerInput = SCANNER.nextInt();
             } catch (Exception e){
                 System.out.println("Error fel input! Du måste skriva 1, 2 eller 3");
                 break;
@@ -31,36 +40,32 @@ static void stenSaxPåse(){
             computerChoice = ran.nextInt(3) + 1;
 
             if (1 == (playerInput) || 2 == (playerInput) || 3 == (playerInput)) {
-                if (((playerInput == 1) && (computerChoice == 2)) || ((playerInput == 2) && (computerChoice == 3))
-                        || ((playerInput == 3) && (computerChoice == 1))) {
-
-                    playerScore++;
-
-                    System.out.println("\nDu vann!");
-                    System.out.println("Du har: " + playerScore + " poäng.\nDatorn har: " + computerScore);
-                } else if (((playerInput == 2) && (computerChoice == 1)) || ((playerInput == 3) && (computerChoice == 2))
-                        || ((playerInput == 1) && (computerChoice == 3))) {
-
-                    computerScore++;
-
-                    System.out.println("\nDatorn vann!");
-                    System.out.println("Du har: " + playerScore + " poäng.\nDatorn har: " + computerScore);
-                } else if (((playerInput == 1) && (computerChoice == 1)) || ((playerInput == 2) && (computerChoice == 2))
-                        || ((playerInput == 3) && (computerChoice == 3))) {
-
-                    System.out.println("\nOavgjort!");
-                    System.out.println("Du har: " + playerScore + " poäng.\nDatorn har: " + computerScore);
-                }
+                calculateScore(score, computerChoice, playerInput);
             } else {
                 System.out.println("Error fel input! Du måste skriva 1, 2 eller 3");
             }
         }
 
-        if (playerScore == 3){
-            System.out.println("\nGrattis! Du fick: " + playerScore +  "\nDatorn fick: " + computerScore + "\nDu vann över Datorn!\n");
-        } else if (computerScore == 3){
-            System.out.println("\nGrattis datorn! Datorn fick: " + computerScore +  "\nDu fick: " + playerScore + "\nDatorn vann över dig!\n");
-        }
+        consolePresenter.presentTotalWinner(score.computerScore, score.playerScore);
 
     }
+
+    private static void calculateScore(Score score, int computerChoice, int playerInput) {
+        if (((playerInput == 1) && (computerChoice == 2)) || ((playerInput == 2) && (computerChoice == 3))
+                || ((playerInput == 3) && (computerChoice == 1))) {
+
+            score.playerScore++;
+            consolePresenter.presentRoundWinner(score, "\nDu vann!");
+        } else if (((playerInput == 2) && (computerChoice == 1)) || ((playerInput == 3) && (computerChoice == 2))
+                || ((playerInput == 1) && (computerChoice == 3))) {
+
+            score.computerScore++;
+
+            consolePresenter.presentRoundWinner(score, "\nDatorn vann!");
+        } else {
+
+            consolePresenter.presentRoundWinner(score, "\nOavgjort!");
+        }
+    }
+
 }
