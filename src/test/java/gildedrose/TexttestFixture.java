@@ -59,28 +59,12 @@ public class TexttestFixture {
                 new TestItem("Conjured Mana Cake", 3, 6)};
 
 
-        GildedRoseRefactored app = new GildedRoseRefactored(items);
+        GildedRose app = new GildedRose(items);
         GildedRoseRefactored refactored = new GildedRoseRefactored(items2);
 
         app.updateQuality();
         refactored.updateQuality();
 
         assertThat(items).isEqualTo(items2);
-
-//
-//
-//        int days = 2;
-//        if (args.length > 0) {
-//            days = Integer.parseInt(args[0]) + 1;
-//        }
-//
-//        for (int i = 0; i < days; i++) {
-//            System.out.println("-------- day " + i + " --------");
-//            System.out.println("name, sellIn, quality");
-//            for (TestItem item : items) {
-//                System.out.println(item);
-//            }
-//            System.out.println();
-//        }
     }
 }
