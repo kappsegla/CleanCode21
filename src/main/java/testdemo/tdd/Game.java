@@ -18,6 +18,28 @@ public class Game {
     }
 
     public int score() {
-        return totalScore;
+        int score = 0;
+
+        for (int frame = 0; frame < 20; frame++) {
+            score += rolls[frame];
+            score += calculateBonus(frame);
+        }
+        return score;
+    }
+
+    private int calculateBonus(int frame) {
+        if (isStrike(frame))
+            return rolls[frame + 2] + rolls[frame + 3];
+        else if (isSpare(frame))
+            return rolls[frame + 2];
+        return 0;
+    }
+
+    private boolean isStrike(int frame) {
+        return frame % 2 == 0 && rolls[frame] == ALL_PINS;
+    }
+
+    private boolean isSpare(int frame) {
+        return frame % 2 == 0 && rolls[frame] + rolls[frame + 1] == ALL_PINS;
     }
 }
