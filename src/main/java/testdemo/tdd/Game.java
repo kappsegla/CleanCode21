@@ -6,11 +6,17 @@ public class Game {
     private int currentRoll = 0;
 
     public void roll(int pinsKnockedDown) {
-        if (isFirstRollInFrame() && pinsKnockedDown == ALL_PINS) {
+        if( isLastFrame())
+            rolls[currentRoll++] = pinsKnockedDown;
+        else if (isFirstRollInFrame() && pinsKnockedDown == ALL_PINS) {
             rolls[currentRoll++] = pinsKnockedDown;
             currentRoll++;
         } else
             rolls[currentRoll++] = pinsKnockedDown;
+    }
+
+    private boolean isLastFrame() {
+        return currentRoll >=18;
     }
 
     private boolean isFirstRollInFrame() {

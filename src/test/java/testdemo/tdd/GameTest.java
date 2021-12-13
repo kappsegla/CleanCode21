@@ -55,6 +55,13 @@ public class GameTest {
 
         assertEquals(12, game.score());
     }
+    
+    @Test
+    void perfectGame() {
+        multipleRolls(12, 10);
+
+        assertEquals(300, game.score());
+    }
 
     private void multipleRolls(int n, int pins) {
         for (int i = 0; i < n; i++) {
