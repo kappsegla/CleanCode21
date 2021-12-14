@@ -55,7 +55,7 @@ public class GameTest {
 
         assertEquals(12, game.score());
     }
-    
+
     @Test
     void perfectGame() {
         multipleRolls(12, 10);
