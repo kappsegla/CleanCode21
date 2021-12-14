@@ -63,6 +63,41 @@ public class GameTest {
         assertEquals(300, game.score());
     }
 
+    @Test
+    void normalGame() {
+        game.roll(10);
+        game.roll(0);
+        game.roll(1);
+        game.roll(5);
+        game.roll(5);
+        game.roll(10);
+        game.roll(9);
+        game.roll(1);
+        game.roll(5);
+        game.roll(0);
+        game.roll(10);
+        game.roll(10);
+        game.roll(7);
+        game.roll(3);
+        game.roll(2);
+        game.roll(8);
+        game.roll(10);
+
+        assertEquals(151,game.score());
+    }
+
+    @Test
+    void lateBloomer() {
+        multipleRolls(18,0);
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
+
+        assertEquals(30,game.score());
+    }
+
+    
+
     private void multipleRolls(int n, int pins) {
         for (int i = 0; i < n; i++) {
             game.roll(pins);
