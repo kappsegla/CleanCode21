@@ -96,6 +96,14 @@ public class GameTest {
         assertEquals(30,game.score());
     }
 
+    @Test
+    void hardToAchieve() {
+        multipleRolls(11,10);
+        game.roll(2);
+
+        assertEquals(292,game.score());
+    }
+
     
 
     private void multipleRolls(int n, int pins) {
