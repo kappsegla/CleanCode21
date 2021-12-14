@@ -25,8 +25,6 @@ public class GameTest {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try (PrintStream inmemory = new PrintStream(baos)) {
 			System.setOut(inmemory);
-			
-			
 			aGame.add("Chet");
 			aGame.add("Pat");
 			aGame.add("Sue");
