@@ -51,7 +51,6 @@ public class Game {
         else if (frame <= 8)
             return rolls[frameToIndex(frame) + 2] + rolls[frameToIndex(frame) + 3];
         return rolls[frameToIndex(frame) + 1] + rolls[frameToIndex(frame) + 2];
-
     }
 
     private int frameToIndex(int frame) {
