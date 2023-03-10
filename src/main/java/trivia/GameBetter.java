@@ -3,25 +3,10 @@ package trivia;
 import java.util.ArrayList;
 import java.util.List;
 
-import static trivia.GameBetter.Category.*;
+import static trivia.Category.*;
 
 
 public class GameBetter implements IGame {
-
-    enum Category {
-        POP("Pop"), SCIENCE("Science"), SPORTS("Sports"), ROCK("Rock");
-
-        private final String value;
-
-        Category(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return this.value;
-        }
-    }
 
     List<String> players = new ArrayList<>();
     int[] places = new int[6];
