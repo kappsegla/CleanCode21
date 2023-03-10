@@ -5,6 +5,10 @@ import java.util.List;
 
 
 public class GameBetter implements IGame {
+   public static final String POP = "Pop";
+   public static final String SCIENCE = "Science";
+   public static final String SPORTS = "Sports";
+   public static final String ROCK = "Rock";
    List<String> players = new ArrayList<>();
    int[] places = new int[6];
    int[] purses = new int[6];
@@ -86,28 +90,28 @@ public class GameBetter implements IGame {
 
    private void askQuestion() {
       var currentCategory = currentCategory();
-      if (currentCategory.equals("Pop"))
+      if (currentCategory.equals(POP))
          System.out.println(popQuestions.remove(0));
-      if (currentCategory.equals("Science"))
+      if (currentCategory.equals(SCIENCE))
          System.out.println(scienceQuestions.remove(0));
-      if (currentCategory.equals("Sports"))
+      if (currentCategory.equals(SPORTS))
          System.out.println(sportsQuestions.remove(0));
-      if (currentCategory.equals("Rock"))
+      if (currentCategory.equals(ROCK))
          System.out.println(rockQuestions.remove(0));
    }
 
 
    private String currentCategory() {
-      if (places[currentPlayer] == 0) return "Pop";
-      if (places[currentPlayer] == 4) return "Pop";
-      if (places[currentPlayer] == 8) return "Pop";
-      if (places[currentPlayer] == 1) return "Science";
-      if (places[currentPlayer] == 5) return "Science";
-      if (places[currentPlayer] == 9) return "Science";
-      if (places[currentPlayer] == 2) return "Sports";
-      if (places[currentPlayer] == 6) return "Sports";
-      if (places[currentPlayer] == 10) return "Sports";
-      return "Rock";
+      if (places[currentPlayer] == 0) return POP;
+      if (places[currentPlayer] == 4) return POP;
+      if (places[currentPlayer] == 8) return POP;
+      if (places[currentPlayer] == 1) return SCIENCE;
+      if (places[currentPlayer] == 5) return SCIENCE;
+      if (places[currentPlayer] == 9) return SCIENCE;
+      if (places[currentPlayer] == 2) return SPORTS;
+      if (places[currentPlayer] == 6) return SPORTS;
+      if (places[currentPlayer] == 10) return SPORTS;
+      return ROCK;
    }
 
    public boolean wasCorrectlyAnswered() {
