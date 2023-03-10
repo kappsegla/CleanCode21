@@ -88,13 +88,14 @@ public class GameBetter implements IGame {
    }
 
    private void askQuestion() {
-      if (currentCategory() == "Pop")
+      var currentCategory = currentCategory();
+      if (currentCategory.equals("Pop"))
          System.out.println(popQuestions.remove(0));
-      if (currentCategory() == "Science")
+      if (currentCategory.equals("Science"))
          System.out.println(scienceQuestions.remove(0));
-      if (currentCategory() == "Sports")
+      if (currentCategory.equals("Sports"))
          System.out.println(sportsQuestions.remove(0));
-      if (currentCategory() == "Rock")
+      if (currentCategory.equals("Rock"))
          System.out.println(rockQuestions.remove(0));
    }
 
