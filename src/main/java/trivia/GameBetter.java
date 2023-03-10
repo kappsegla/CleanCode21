@@ -8,7 +8,6 @@ import static trivia.Category.*;
 
 public class GameBetter implements IGame {
     List<Player> players = new ArrayList<>();
-    int[] places = new int[6];
     int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
 
@@ -35,7 +34,6 @@ public class GameBetter implements IGame {
 
     public boolean add(String playerName) {
         players.add(new Player(playerName));
-        places[howManyPlayers()] = 0;
         purses[howManyPlayers()] = 0;
         inPenaltyBox[howManyPlayers()] = false;
 
@@ -59,12 +57,15 @@ public class GameBetter implements IGame {
                 isGettingOutOfPenaltyBox = true;
 
                 System.out.println(currentPlayerName + " is getting out of the penalty box");
-                places[currentPlayer] = places[currentPlayer] + roll;
-                if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+                players.get(currentPlayer).setPlace(players.get(currentPlayer).getPlace() + roll);
+
+                if (players.get(currentPlayer).getPlace() > 11)
+                    players.get(currentPlayer).setPlace(players.get(currentPlayer).getPlace() - 12);
 
                 System.out.println(currentPlayerName
                         + "'s new location is "
-                        + places[currentPlayer]);
+                        + players.get(currentPlayer).getPlace());
+
                 System.out.println("The category is " + currentCategory());
                 System.out.println(askQuestion());
             } else {
@@ -74,12 +75,14 @@ public class GameBetter implements IGame {
 
         } else {
 
-            places[currentPlayer] = places[currentPlayer] + roll;
-            if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+            players.get(currentPlayer).setPlace(players.get(currentPlayer).getPlace() + roll);
+
+            if (players.get(currentPlayer).getPlace() > 11)
+                players.get(currentPlayer).setPlace(players.get(currentPlayer).getPlace() - 12);
 
             System.out.println(currentPlayerName
                     + "'s new location is "
-                    + places[currentPlayer]);
+                    + players.get(currentPlayer).getPlace());
             System.out.println("The category is " + currentCategory());
             System.out.println(askQuestion());
         }
@@ -87,8 +90,7 @@ public class GameBetter implements IGame {
     }
 
     private String askQuestion() {
-        var category = currentCategory();
-        return switch (category) {
+        return switch (currentCategory()) {
             case POP -> popQuestions.remove(0);
             case SCIENCE -> scienceQuestions.remove(0);
             case SPORTS -> sportsQuestions.remove(0);
@@ -98,15 +100,16 @@ public class GameBetter implements IGame {
 
 
     private Category currentCategory() {
-        if (places[currentPlayer] == 0) return POP;
-        if (places[currentPlayer] == 4) return POP;
-        if (places[currentPlayer] == 8) return POP;
-        if (places[currentPlayer] == 1) return SCIENCE;
-        if (places[currentPlayer] == 5) return SCIENCE;
-        if (places[currentPlayer] == 9) return SCIENCE;
-        if (places[currentPlayer] == 2) return SPORTS;
-        if (places[currentPlayer] == 6) return SPORTS;
-        if (places[currentPlayer] == 10) return SPORTS;
+        //alt enter, byt till switch :))
+        if (players.get(currentPlayer).getPlace() == 0) return POP;
+        if (players.get(currentPlayer).getPlace() == 4) return POP;
+        if (players.get(currentPlayer).getPlace() == 8) return POP;
+        if (players.get(currentPlayer).getPlace() == 1) return SCIENCE;
+        if (players.get(currentPlayer).getPlace() == 5) return SCIENCE;
+        if (players.get(currentPlayer).getPlace() == 9) return SCIENCE;
+        if (players.get(currentPlayer).getPlace() == 2) return SPORTS;
+        if (players.get(currentPlayer).getPlace() == 6) return SPORTS;
+        if (players.get(currentPlayer).getPlace() == 10) return SPORTS;
         return ROCK;
     }
 
@@ -167,6 +170,7 @@ public class GameBetter implements IGame {
 
 class Player {
     private final String name;
+    private int place;
 
     public Player(String name) {
         this.name = name;
@@ -175,4 +179,13 @@ class Player {
     public String getName() {
         return name;
     }
+
+    public int getPlace(){
+        return place;
+    }
+
+    public void setPlace(int place) {
+        this.place = place;
+    }
+
 }
