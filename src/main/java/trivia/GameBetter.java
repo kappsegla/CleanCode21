@@ -100,17 +100,19 @@ public class GameBetter implements IGame {
 
 
     private Category currentCategory() {
-        //alt enter, byt till switch :))
-        if (players.get(currentPlayer).getPlace() == 0) return POP;
-        if (players.get(currentPlayer).getPlace() == 4) return POP;
-        if (players.get(currentPlayer).getPlace() == 8) return POP;
-        if (players.get(currentPlayer).getPlace() == 1) return SCIENCE;
-        if (players.get(currentPlayer).getPlace() == 5) return SCIENCE;
-        if (players.get(currentPlayer).getPlace() == 9) return SCIENCE;
-        if (players.get(currentPlayer).getPlace() == 2) return SPORTS;
-        if (players.get(currentPlayer).getPlace() == 6) return SPORTS;
-        if (players.get(currentPlayer).getPlace() == 10) return SPORTS;
-        return ROCK;
+        return switch (players.get(currentPlayer).getPlace() % 4) {
+            case 0 -> POP;
+            case 1 -> SCIENCE;
+            case 2 -> SPORTS;
+            default -> ROCK;
+        };
+
+//        return switch (players.get(currentPlayer).getPlace()) {
+//            case 0, 4, 8 -> POP;
+//            case 1, 5, 9 -> SCIENCE;
+//            case 2, 6, 10 -> SPORTS;
+//            default -> ROCK;
+//        };
     }
 
     public boolean wasCorrectlyAnswered() {
@@ -180,7 +182,7 @@ class Player {
         return name;
     }
 
-    public int getPlace(){
+    public int getPlace() {
         return place;
     }
 
