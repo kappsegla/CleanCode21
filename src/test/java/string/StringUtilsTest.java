@@ -37,4 +37,36 @@ class StringUtilsTest {
         assertEquals(expected, actual);
     }
 
+
+    @Test
+    void doesStringContain26Chars(){
+        boolean actual = StringUtils.stringContainsAllChars("fghijpklmnopqrstuvawxyzabcde");
+        boolean expected = true;
+
+        assertEquals(expected, actual);
+
+    }
+    @Test
+    void stringDoesNotContain26Chars(){
+        boolean actual = StringUtils.stringContainsAllChars("Martin");
+        boolean expected = false;
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void stringDoesContainAllChars(){
+        boolean actual = StringUtils.stringContainsAllChars("ABCDefGHIjKLmNOPQrStUVwXYz");
+        boolean expected = true;
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    void stringDoesContainAllCharsFilterNonLetter(){
+        boolean actual = StringUtils.stringContainsAllChars("ABCDefGHIj.LmNOPQrStUVwXYz");
+        boolean expected = false;
+
+        assertEquals(expected, actual);
+    }
+
 }
