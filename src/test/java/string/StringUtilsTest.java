@@ -69,4 +69,21 @@ class StringUtilsTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void longestCommonSubSequence() {
+        String n1 = "ABCD";
+        String n2 = "ACBAD";
+        int actual = StringUtils.longestCommonSubSequence(n1,n2);
+        assertEquals(actual, 3);
+    }
+
+    @Test
+    void longestCommonSubSequence2() {
+        String n1 = "ABCDEFG";
+        String n2 = "BCDGK";
+        int actual = StringUtils.longestCommonSubSequence(n1,n2);
+        assertEquals(actual, 4);
+    }
+
+
 }
