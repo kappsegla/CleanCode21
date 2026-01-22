@@ -10,59 +10,94 @@ class GildedRoseRefactored {
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
             Item item = items[i];
-            if (!isAgedBrie(item)
-                    && !isBackStagePass(item)) {
-                if (item.quality > 0) {
-                    if (!isSulfuras(item)) {
-                        item.quality = item.quality - 1;
-                    }
-                }
-            } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
+            updateBeforeExpiration(item);
 
-                    if (isBackStagePass(item)) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-                    }
-                }
+            if (isNotSulfuras(item)) {
+                decreaseSellIn(item);
             }
 
-            if (!isSulfuras(item)) {
-                item.sellIn = item.sellIn - 1;
-            }
-
-            if (item.sellIn < 0) {
-                if (!isAgedBrie(item)) {
-                    if (!isBackStagePass(item)) {
-                        if (item.quality > 0) {
-                            if (!isSulfuras(item)) {
-                                item.quality = item.quality - 1;
-                            }
-                        }
-                    } else {
-                        item.quality = item.quality - item.quality;
-                    }
-                } else {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
-                }
+            if (isExpired(item)) {
+                updateExpiredItem(item);
             }
         }
     }
 
-    private static boolean isSulfuras(Item item) {
-        return item.name.equals("Sulfuras, Hand of Ragnaros");
+    private static void updateBeforeExpiration(Item item) {
+        if (isAgedBrie(item) || isBackStagePass(item)) {
+            if (hasMaxQuality(item)) {
+                increaseQuality(item);
+
+                if (isBackStagePass(item)) {
+                    increaseBackStageQuality(item);
+                }
+            }
+        } else {
+            updateNormalItem(item);
+        }
+    }
+
+    private static void updateNormalItem(Item item) {
+        if (hasMinQuality(item)) {
+            if (isNotSulfuras(item)) {
+                decreaseQuality(item);
+            }
+        }
+    }
+
+    private static boolean isExpired(Item item) {
+        return item.sellIn < 0;
+    }
+
+    private static void updateExpiredItem(Item item) {
+        if (!isAgedBrie(item)) {
+            if (!isBackStagePass(item)) {
+                updateNormalItem(item);
+            } else {
+                item.quality = 0;
+            }
+        } else {
+            if (hasMaxQuality(item)) {
+                increaseQuality(item);
+            }
+        }
+    }
+
+    private static void decreaseSellIn(Item item) {
+        item.sellIn = item.sellIn - 1;
+    }
+
+    private static void increaseBackStageQuality(Item item) {
+        if (item.sellIn < 11) {
+            if (hasMaxQuality(item)) {
+                increaseQuality(item);
+            }
+        }
+
+        if (item.sellIn < 6) {
+            if (hasMaxQuality(item)) {
+                increaseQuality(item);
+            }
+        }
+    }
+
+    private static boolean hasMaxQuality(Item item) {
+        return item.quality < 50;
+    }
+
+    private static boolean hasMinQuality(Item item) {
+        return item.quality > 0;
+    }
+
+    private static void increaseQuality(Item item) {
+        item.quality = item.quality + 1;
+    }
+
+    private static void decreaseQuality(Item item) {
+        item.quality = item.quality - 1;
+    }
+
+    private static boolean isNotSulfuras(Item item) {
+        return !item.name.equals("Sulfuras, Hand of Ragnaros");
     }
 
     private static boolean isBackStagePass(Item item) {
