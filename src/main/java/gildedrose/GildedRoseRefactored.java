@@ -23,16 +23,24 @@ class GildedRoseRefactored {
     }
 
     private static void updateBeforeExpiration(Item item) {
-        if (isAgedBrie(item) || isBackStagePass(item)) {
-            if (hasMaxQuality(item)) {
-                increaseQuality(item);
-
-                if (isBackStagePass(item)) {
-                    increaseBackStageQuality(item);
-                }
-            }
-        } else {
+        if (isAgedBrie(item)) {
+            updateAgedBrie(item);
+        } else if (isBackStagePass(item)) {
+            updateBackStagePass(item);
+        } else
             updateNormalItem(item);
+    }
+
+    private static void updateBackStagePass(Item item) {
+        if (hasMaxQuality(item)) {
+            increaseQuality(item);
+            increaseBackStageQuality(item);
+        }
+    }
+
+    private static void updateAgedBrie(Item item) {
+        if (hasMaxQuality(item)) {
+            increaseQuality(item);
         }
     }
 
@@ -49,16 +57,14 @@ class GildedRoseRefactored {
     }
 
     private static void updateExpiredItem(Item item) {
-        if (!isAgedBrie(item)) {
-            if (!isBackStagePass(item)) {
-                updateNormalItem(item);
-            } else {
-                item.quality = 0;
-            }
-        } else {
+        if (isAgedBrie(item)) {
             if (hasMaxQuality(item)) {
                 increaseQuality(item);
             }
+        } else if (isBackStagePass(item)) {
+            item.quality = 0;
+        } else {
+            updateNormalItem(item);
         }
     }
 
