@@ -1,5 +1,7 @@
 package gildedrose;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class TestItem extends Item{
@@ -31,9 +33,9 @@ class TestItem extends Item{
 
 
 public class TexttestFixture {
-    public static void main(String[] args) {
-        System.out.println("OMGHAI!");
 
+    @Test
+    void validateUpdateQuality() {
         Item[] items = new TestItem[]{
                 new TestItem("+5 Dexterity Vest", 10, 20),
                 new TestItem("Aged Brie", 2, 0),
